@@ -5,9 +5,12 @@
     function W(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
     function apply() {
+        // Переводим основной текст
         document.querySelectorAll("[data-no]").forEach(function (e) {
             e.textContent = e.getAttribute("data-" + lang);
         });
+        
+        // Переводим подсказки (тултипы)
         document.querySelectorAll("[data-tip-no]").forEach(function (e) {
             var tip = e.getAttribute("data-tip-" + lang);
             if (tip) {
@@ -15,6 +18,7 @@
                 e.setAttribute("title", tip);
             }
         });
+        
         root.lang = lang;
         document.getElementById("lang").textContent = lang === "no" ? "EN" : "NO";
     }
@@ -37,7 +41,7 @@
         W("theme", t);
     };
 
-    /* Tech tabs */
+    // Вкладки в технологиях
     var bs = document.querySelectorAll("#tabs button"), ps = document.querySelectorAll(".panel");
     bs.forEach(function (b) {
         b.onclick = function () {
@@ -47,7 +51,7 @@
         };
     });
 
-    /* Scroll reveal */
+    // Анимация появления при скролле
     if ("IntersectionObserver" in window) {
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
